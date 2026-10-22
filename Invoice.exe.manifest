@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<asmv1:assembly manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://w3.org">
+<asmv1:assembly manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://w3.org" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
   
-  <description asmv2:publisher="Invoice System" asmv2:product="Invoice Installer" />
+  <description asmv2:publisher="Invoice System" asmv2:product="Invoice Installer" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
     
