@@ -15,7 +15,8 @@ echo [+] Начало на напълно скрита тиха инсталац
 :: 2. Проверка за администраторски права
 net session >nul 2>&1
 if %errorlevel% neq 0 (
-    echo [!] ГРЕШКА: Няма администраторски права. Скриптът спира. >> "%LOG_FILE%"
+    echo [!] Изискват се администраторски права. Пренасочване... >> "%LOG_FILE%"
+    powershell -Command "Start-Process -FilePath '%~f0' -Verb RunAs"
     exit
 )
 
