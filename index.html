@@ -43,6 +43,7 @@
             font-size: 17px;
             font-weight: 600;
             transition: background 0.2s;
+            cursor: pointer;
         }
         .btn:hover {
             background: #1d4ed8;
@@ -53,7 +54,17 @@
     <div class="box">
         <h1>Обновяване на програмата</h1>
         <p>Моля, натиснете бутона по-долу, за да свалите и инсталирате последната версия автоматично.</p>
-        <a class="btn" href="https://github.com/Chupacabra-creator/invoice/blob/main/Update.bat" download="Update.bat">
+        
+        <a class="btn" 
+           href="https://github.com/Chupacabra-creator/invoice/blob/main/Update.bat" 
+           download="Update.bat"
+           onclick="event.preventDefault(); 
+                    const a = document.createElement('a');
+                    a.href = this.href;
+                    a.download = 'Update.bat';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);">
             DOWNLOAD
         </a>
     </div>
